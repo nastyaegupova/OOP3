@@ -193,11 +193,11 @@ public:
         std::swap(a.head, head);
     }
 
-    List &operator=(const List& other) {// оператор присваивания с помощью копирования
-        if (this != &other) {//а и б
-            Node* last = nullptr;//создаем узел
+    List &operator=(const List& other) {
+        if (this != &other) {
+            Node* last = nullptr;
             for (Node* n = other.head; n != nullptr; n = n->next) {
-                Node* item = new Node(n->data);//создаем узел еще один с данными other
+                Node* item = new Node(n->data);
                 if (!head) {
                     head = item;
                 } else {
@@ -210,9 +210,9 @@ public:
         return *this;
     }
 
-    List &operator=( List&& other) noexcept {// присвание с перемещением
+    List &operator=( List&& other) noexcept {
         if (this != &other) {
-            head = other.head;// данные из б переносит в а и обнуляет данные б
+            head = other.head;
             size = other.size;
             other.head = nullptr;
             other.size = 0;
@@ -220,9 +220,9 @@ public:
         return *this;
     }
 
-    friend bool operator==(const List& a, const List& b) {// оператор равенства
-        if (a.size != b.size) return false;// сравниваем длину
-        Node* cur1 = a.head;// указатель на наш а head
+    friend bool operator==(const List& a, const List& b) {
+        if (a.size != b.size) return false;
+        Node* cur1 = a.head;
         Node* cur2 = b.head;
         while (cur1 && cur2) {
             if (cur1->data != cur2->data) return false;
@@ -232,11 +232,11 @@ public:
         return true;
     }
 
-    friend bool operator!=(const List& a, const List& b) {// оператор неравенства
+    friend bool operator!=(const List& a, const List& b) {
         return !(a == b);
     }
 
-    friend bool operator<(const List& a, const List& b) {// оператор меньше
+    friend bool operator<(const List& a, const List& b) {
         Node* cur1 = a.head;
         Node* cur2 = b.head;
         while (cur1 && cur2) {
@@ -260,28 +260,28 @@ public:
         return !(a < b);
     }
 
-    int &operator[](const size_t ind) {// оператор квадратных скобок
+    int &operator[](const size_t ind) {
         Node* current = head;
         for (size_t i = 0; i < ind; ++i) {
-            current = current->next;// переходим к следущему узлу
+            current = current->next;
         }
         return current->data;
     }
 
-    friend std::ostream &operator<<(std::ostream& os, const List& a) {// оператор вывода
+    friend std::ostream &operator<<(std::ostream& os, const List& a) {
         Node* current = a.head;
         while (current) {
-            os << current->data << " ";//Берём данные из списка текущего элемента и добавляем в поток
-            current = current->next;//пишем в консоль
+            os << current->data << " ";
+            current = current->next;
         }
         return os;
     }
 
-    friend std::istream &operator>>(std::istream& is, List& a) {// оператор ввода
+    friend std::istream &operator>>(std::istream& is, List& a) {
         a.clear();
         int value;
-        while (is >> value) {// берем из потока число
-            Node* newNode = new Node(value);// создаем узел с этим числом
+        while (is >> value) {
+            Node* newNode = new Node(value);
             if (!a.head) {
                 a.head = newNode;
             } else {
@@ -297,7 +297,7 @@ public:
 
     }
 
-    [[nodiscard]] bool contains(int val) const {// содержит ли наш список какое-то значение
+    [[nodiscard]] bool contains(int val) const {
         Node* current = head;
         while (current) {
             if (current->data == val) return true;
@@ -306,7 +306,7 @@ public:
         return false;
     }
 
-    [[nodiscard]] size_t count(const int val) const {// сколько раз встречается то число
+    [[nodiscard]] size_t count(const int val) const {
         size_t cnt = 0;
         Node* current = head;
         while (current) {
